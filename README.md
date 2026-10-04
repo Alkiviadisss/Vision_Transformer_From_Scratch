@@ -129,7 +129,7 @@ The final weights are saved to `vit_finetuned.pth`.
 
 ```bash
 git clone https://github.com/alkiviadisss/Vision_Transformer_From_Scratch.git
-cd <your-repo>
+cd Vision_Transformer_From_Scratch
 
 pip install torch torchvision transformers accelerate scikit-learn matplotlib seaborn
 ```
