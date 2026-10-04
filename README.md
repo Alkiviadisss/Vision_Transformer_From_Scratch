@@ -195,12 +195,11 @@ filled in once a run completes.
 ## Reference
 
 ```bibtex
-@article{dosovitskiy2020vit,
-  title   = {An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale},
-  author  = {Dosovitskiy, Alexey and Beyer, Lucas and Kolesnikov, Alexander and others},
-  journal = {arXiv preprint arXiv:2010.11929},
-  year    = {2020}
-}
+Article by dosovitskiy2020vit,
+Title: An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale,
+Author: Dosovitskiy, Alexey and Beyer, Lucas and Kolesnikov, Alexander and others,
+Journal: arXiv preprint arXiv:2010.11929,
+Year: 2020
 ```
 ---
 
