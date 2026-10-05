@@ -25,7 +25,7 @@ tensor by tensor into the custom model and fine-tuned on CIFAR-10 using the pape
 .
 ├── ViT_Original.py             # ViT architecture implemented from scratch
 ├── Load_Pretrained_Weights.py  # Maps HF ViT-B/16 (ImageNet-21k) weights into the custom model
-├── Fine_Tune.py                # CIFAR-10 datasets, transforms, stratified train/val split, dataloaders
+├── Preprocess.py                # CIFAR-10 datasets, transforms, stratified train/val split, dataloaders
 ├── Train.py                    # Fine-tuning with Hugging Face Trainer
 ├── Evaluate.py                 # Test-set metrics + confusion matrix
 └── README.md
@@ -93,7 +93,7 @@ The classification head is **not** transferred. It is newly initialized for the 
 
 ## Data Pipeline
 
-`Fine_Tune.py` prepares CIFAR-10 for a model pretrained at 224 x 224:
+`Preprocess.py` prepares CIFAR-10 for a model pretrained at 224 x 224:
 
 - **Resize** 32 x 32 images to 224 x 224
 - **Normalize** with mean = std = 0.5 per channel (matching the in21k checkpoint's preprocessing)
