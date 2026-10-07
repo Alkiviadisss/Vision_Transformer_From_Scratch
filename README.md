@@ -23,11 +23,11 @@ tensor by tensor into the custom model and fine-tuned on CIFAR-10 using the pape
 
 ```
 .
-├── ViT_Original.py             # ViT architecture implemented from scratch
-├── Load_Pretrained_Weights.py  # Maps HF ViT-B/16 (ImageNet-21k) weights into the custom model
-├── Preprocess.py                # CIFAR-10 datasets, transforms, stratified train/val split, dataloaders
-├── Train.py                    # Fine-tuning with Hugging Face Trainer
-├── Evaluate.py                 # Test-set metrics + confusion matrix
+├── 01_ViT_Original.py             # ViT architecture implemented from scratch
+├── 02_Load_Pretrained_Weights.py  # Maps HF ViT-B/16 (ImageNet-21k) weights into the custom model
+├── 03_Preprocess.py               # CIFAR-10 datasets, transforms, stratified train/val split, dataloaders
+├── 04_Train.py                    # Fine-tuning with Hugging Face Trainer
+├── 05_Evaluate.py                 # Test-set metrics + confusion matrix
 └── README.md
 ```
 
@@ -35,7 +35,7 @@ tensor by tensor into the custom model and fine-tuned on CIFAR-10 using the pape
 
 ## Architecture
 
-The model in `ViT_Original.py` follows the ViT-B/16 configuration:
+The model in `01_ViT_Original.py` follows the ViT-B/16 configuration:
 
 | Component | Details |
 |---|---|
@@ -73,7 +73,7 @@ The `forward` signature returning a dict with `loss` makes the model directly co
 
 ## Pretrained Weight Transfer
 
-`Load_Pretrained_Weights.py` loads `google/vit-base-patch16-224-in21k` and copies weights into the custom model:
+`02_Load_Pretrained_Weights.py` loads `google/vit-base-patch16-224-in21k` and copies weights into the custom model:
 
 | Custom model | Hugging Face `ViTModel` |
 |---|---|
@@ -93,7 +93,7 @@ The classification head is **not** transferred. It is newly initialized for the 
 
 ## Data Pipeline
 
-`Preprocess.py` prepares CIFAR-10 for a model pretrained at 224 x 224:
+`03_Preprocess.py` prepares CIFAR-10 for a model pretrained at 224 x 224:
 
 - **Resize** 32 x 32 images to 224 x 224
 - **Normalize** with mean = std = 0.5 per channel (matching the in21k checkpoint's preprocessing)
@@ -105,7 +105,7 @@ The classification head is **not** transferred. It is newly initialized for the 
 
 ## Training Configuration
 
-`Train.py` uses the Hugging Face `Trainer` with hyperparameters that follow the fine-tuning setup in the ViT paper:
+`04_Train.py` uses the Hugging Face `Trainer` with hyperparameters that follow the fine-tuning setup in the ViT paper:
 
 | Setting | Value |
 |---|---|
@@ -143,13 +143,13 @@ A CUDA-capable GPU is strongly recommended. ViT-B/16 at 224 x 224 for 10k steps 
 **1. Fine-tune** (downloads CIFAR-10 and the pretrained weights automatically on first run):
 
 ```bash
-python Train.py
+python 04_Train.py
 ```
 
 **2. Evaluate** on the CIFAR-10 test set:
 
 ```bash
-python Evaluate.py
+python 05_Evaluate.py
 ```
 
 This prints the metrics and saves `confusion_matrix.png`.
@@ -170,7 +170,7 @@ This prints the metrics and saves `confusion_matrix.png`.
 - The training configuration follows the fine-tuning recipe from the paper.
 
 ### Reproducing the results
-Run `python Train.py` followed by `python Evaluate.py` on a CUDA GPU. The metrics table below will be
+Run `python 04_Train.py` followed by `python 05_Evaluate.py` on a CUDA GPU. The metrics table below will be
 filled in once a run completes.
 
 | Metric | Score |
