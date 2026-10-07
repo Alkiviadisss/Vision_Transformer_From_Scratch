@@ -1,7 +1,7 @@
 import torch
 from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, precision_score, recall_score
-from ViT_Original import ViT
-from Fine_Tune import test_loader
+from 01_ViT_Original import ViT
+from 03_Preprocess import test_loader
 import matplotlib.pyplot as plt
 import seaborn as sns
 
