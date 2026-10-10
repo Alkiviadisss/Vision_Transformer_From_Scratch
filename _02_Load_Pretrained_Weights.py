@@ -1,5 +1,5 @@
 from transformers import ViTModel
-from 01_ViT_Original import ViT
+from _01_ViT_Original import ViT
 import torch
 
 model = ViT(in_channels=3, patch_size=16, emb_size=768, img_size=224, num_heads=12, mlp_dim=3072,num_layers=12, num_classes=10)
