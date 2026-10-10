@@ -23,11 +23,11 @@ tensor by tensor into the custom model and fine-tuned on CIFAR-10 using the pape
 
 ```
 .
-├── 01_ViT_Original.py             # ViT architecture implemented from scratch
-├── 02_Load_Pretrained_Weights.py  # Maps HF ViT-B/16 (ImageNet-21k) weights into the custom model
-├── 03_Preprocess.py               # CIFAR-10 datasets, transforms, stratified train/val split, dataloaders
-├── 04_Train.py                    # Fine-tuning with Hugging Face Trainer
-├── 05_Evaluate.py                 # Test-set metrics + confusion matrix
+├── _01_ViT_Original.py             # ViT architecture implemented from scratch
+├── _02_Load_Pretrained_Weights.py  # Maps HF ViT-B/16 (ImageNet-21k) weights into the custom model
+├── _03_Preprocess.py               # CIFAR-10 datasets, transforms, stratified train/val split, dataloaders
+├── _04_Train.py                    # Fine-tuning with Hugging Face Trainer
+├── _05_Evaluate.py                 # Test-set metrics + confusion matrix
 └── README.md
 ```
 
@@ -35,7 +35,7 @@ tensor by tensor into the custom model and fine-tuned on CIFAR-10 using the pape
 
 ## Architecture
 
-The model in `01_ViT_Original.py` follows the ViT-B/16 configuration:
+The model in `_01_ViT_Original.py` follows the ViT-B/16 configuration:
 
 | Component | Details |
 |---|---|
@@ -73,7 +73,7 @@ The `forward` signature returning a dict with `loss` makes the model directly co
 
 ## Pretrained Weight Transfer
 
-`02_Load_Pretrained_Weights.py` loads `google/vit-base-patch16-224-in21k` and copies weights into the custom model:
+`_02_Load_Pretrained_Weights.py` loads `google/vit-base-patch16-224-in21k` and copies weights into the custom model:
 
 | Custom model | Hugging Face `ViTModel` |
 |---|---|
@@ -93,7 +93,7 @@ The classification head is **not** transferred. It is newly initialized for the 
 
 ## Data Pipeline
 
-`03_Preprocess.py` prepares CIFAR-10 for a model pretrained at 224 x 224:
+`_03_Preprocess.py` prepares CIFAR-10 for a model pretrained at 224 x 224:
 
 - **Resize** 32 x 32 images to 224 x 224
 - **Normalize** with mean = std = 0.5 per channel (matching the in21k checkpoint's preprocessing)
@@ -105,7 +105,7 @@ The classification head is **not** transferred. It is newly initialized for the 
 
 ## Training Configuration
 
-`04_Train.py` uses the Hugging Face `Trainer` with hyperparameters that follow the fine-tuning setup in the ViT paper:
+`_04_Train.py` uses the Hugging Face `Trainer` with hyperparameters that follow the fine-tuning setup in the ViT paper:
 
 | Setting | Value |
 |---|---|
@@ -143,13 +143,13 @@ A CUDA-capable GPU is strongly recommended. ViT-B/16 at 224 x 224 for 10k steps 
 **1. Fine-tune** (downloads CIFAR-10 and the pretrained weights automatically on first run):
 
 ```bash
-python 04_Train.py
+python _04_Train.py
 ```
 
 **2. Evaluate** on the CIFAR-10 test set:
 
 ```bash
-python 05_Evaluate.py
+python _05_Evaluate.py
 ```
 
 This prints the metrics and saves `confusion_matrix.png`.
@@ -170,7 +170,7 @@ This prints the metrics and saves `confusion_matrix.png`.
 - The training configuration follows the fine-tuning recipe from the paper.
 
 ### Reproducing the results
-Run `python 04_Train.py` followed by `python 05_Evaluate.py` on a CUDA GPU. The metrics table below will be
+Run `python _04_Train.py` followed by `python _05_Evaluate.py` on a CUDA GPU. The metrics table below will be
 filled in once a run completes.
 
 | Metric | Score |
@@ -196,9 +196,9 @@ filled in once a run completes.
 
 ```bibtex
 Article by dosovitskiy2020vit,
-Title: An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale,
-Author: Dosovitskiy, Alexey and Beyer, Lucas and Kolesnikov, Alexander and others,
-Journal: arXiv preprint arXiv:2010.11929,
+Title: An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale
+Author: Dosovitskiy, Alexey and Beyer, Lucas and Kolesnikov, Alexander and others
+Journal: arXiv preprint arXiv:2010.11929
 Year: 2020
 ```
 ---
