@@ -131,7 +131,7 @@ The final weights are saved to `vit_finetuned.pth`.
 git clone https://github.com/alkiviadisss/Vision_Transformer_From_Scratch.git
 cd Vision_Transformer_From_Scratch
 
-pip install torch torchvision transformers accelerate scikit-learn matplotlib seaborn
+pip install requirements.txt
 ```
 
 A CUDA-capable GPU is strongly recommended. ViT-B/16 at 224 x 224 for 10k steps is slow on CPU.
